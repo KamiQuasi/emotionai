@@ -2,8 +2,10 @@
 
 const scoreThreshold = 0.5;
 const inputSize = 512;
-await faceapi.nets.tinyFaceDetector.load('/models',
-new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold }));
+const minConfidence = 0.5;
+
+//await faceapi.nets.tinyFaceDetector.load('/models', new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold }));
+await faceapi.nets.ssdMobilenetv1.load('/models', new faceapi.SsdMobilenetv1Options({ minConfidence }));
 // await faceapi.loadFaceLandmarkModel('/models');
 await faceapi.loadFaceExpressionModel('/models');
 
@@ -80,7 +82,7 @@ function startup() {
             const resizedResults = faceapi.resizeResults(results, photo);
             
             // faceapi.draw.drawDetections(canvas, resizedResults);
-            faceapi.draw.drawFaceExpressions(canvas, resizedResults, minConfidence);
+            //faceapi.draw.drawFaceExpressions(canvas, resizedResults, minConfidence);
         } else {
             clearphoto();
         }
