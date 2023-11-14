@@ -1,14 +1,14 @@
 <html>
     <head>
-        <title>Hello World!</title>
+        <title>Mangum Elementary STEAM Night: AI and ML</title>
         <style>
             body { 
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: auto 1fr;
                 grid-template-rows: auto 1fr;
 
              }
-            h1 {
+            header {
                 grid-column: 1 / 3;
                 text-align: center;
             }
@@ -20,41 +20,36 @@
                 justify-items: center;
                 align-items: center;
             }
-            /* #shot-1 { display: none;} */
-            #snapshots {
-                display: grid;
-                grid-template-columns: repeat(1, 1fr);
-                align-items: center;
+            button {
+                margin-top: 10px;
+                font-size: 4em;
+                padding: 32px;
+                background: radial-gradient(red, darkred);
+                color: #EFEFEF;
+                border-radius: 50px;
+                box-shadow: #CCC 0px 10px;
             }
-            #snapshots canvas {
-                /*
-                border: 1px solid #369;
-                 width: 100%;
-                height: 100%; */
+            button:active {
+                margin-top: 20px;
+                box-shadow: none;
             }
         </style>
     </head>
     <body>
-        <h1>Artificial Intelligence and Machine Learning</h1>
+        <header>
+            <h1>Mangum Elementary STEAM Night</h1>
+            <h2>Artificial Intelligence and Machine Learning</h2>
+        </header>
         <section id="livestream">
         <video id="cam">Video stream not available.</video>
         <button id="startbutton">Take photo</button>
         </section>
-        <section id="snapshots">
-            <canvas id="shot-1"></canvas>
-            <img id="shot-2" />
-            <!--<canvas id="shot-2"></canvas>
-            <canvas id="shot-3"></canvas>
-            <canvas id="shot-4"></canvas>
-            <canvas id="shot-5"></canvas>
-            <canvas id="shot-6"></canvas>
-            <canvas id="shot-7"></canvas>
-            <canvas id="shot-8"></canvas>
-            <canvas id="shot-9"></canvas>
-            <canvas id="shot-10"></canvas>-->
-        </section>
-        <script type="module" src="/js/tf-core.min.js"></script>
-        <script type="module" src="/js/face-api.js"></script>
+        
+        <photo-roll>
+        </photo-roll>
+        
+        <script type="module" src="/js/face-api.min.js"></script>
+        <script type="module" src="/js/photo-roll.js"></script>
         <script type="module" src="/js/emotionai.js"></script>
     </body>
 </html>
