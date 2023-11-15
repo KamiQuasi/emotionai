@@ -9,7 +9,7 @@ export class PhotoRoll extends HTMLElement {
     }
 
     widthLength = 300;
-    max = 10;
+    max = 4;
     photo = 0;
     photos = [];
     canvas = document.createElement('canvas');
@@ -62,6 +62,7 @@ export class PhotoRoll extends HTMLElement {
     [Symbol.iterator]() { return this; }
 
     async next(photo) {
+        
         const context = this.canvas.getContext('2d');
         const height = (photo.videoHeight / photo.videoWidth) * this.widthLength;
         this.canvas.height = height;
@@ -72,8 +73,9 @@ export class PhotoRoll extends HTMLElement {
             this.photo = 0;
         }
         if (this.photos.length == this.max) {
+            this.photos[this.photo].parentElement.firstChild.textContent = emotion;
             this.photos[this.photo].setAttribute('src', this.canvas.toDataURL('image/png'));
-            this.photos[this.photo].parent.innerText = emotion;
+            
         } else {
             const newItem = document.createElement('li');
             newItem.innerText = emotion;
@@ -83,7 +85,7 @@ export class PhotoRoll extends HTMLElement {
             newPhoto.setAttribute('src', this.canvas.toDataURL('image/png'));
             this.photos.push(newPhoto);
         }
-    
+
         return {
             value: this.photo++,
             done: false
@@ -91,10 +93,10 @@ export class PhotoRoll extends HTMLElement {
     }
 
     async detectEmotions(photo) {
-        if (!(!!faceapi.nets.ssdMobilenetv1.params)) {
-            console.log('Model still loading');
-            return;
-        }
+        // if (!(!!faceapi.nets.ssdMobilenetv1.params)) {
+        //     console.log('Model still loading');
+        //     return;
+        // }
 
         const results = await faceapi.detectAllFaces(photo, new faceapi.SsdMobilenetv1Options({ minConfidence }))
             .withFaceExpressions();
